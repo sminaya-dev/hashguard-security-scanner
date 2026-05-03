@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <div style="text-align: center; padding: 4rem 0;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Credential Breach Scanner</h1>
+    <p style="opacity: 0.7; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Securely check if your password has been compromised using
+      <a href="https://www.troyhunt.com/understanding-have-i-been-pwneds-use-of-sha-1-and-k-anonymity/" target="_blank" title="Learn how K-Anonymity protects your privacy"><strong>K-Anonymity</strong></a>.
+      <br />
+      <span style="font-size: 0.85rem; color: var(--accent);">(Only the first 5 characters of your password's hash are sent to the API.)</span>
+    </p>
+
+    <div style="max-width: 500px; margin: 0 auto; background: var(--card-bg); padding: 2rem; border-radius: 8px; border: 1px solid var(--border);">
+      <form method="POST">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}" />
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label style="display:block; text-align: center; margin-bottom: 0.5rem; font-weight: bold;">Password to Check</label>
+          <input type="password" name="password" required placeholder="Enter a password..." style="width: 100%; padding: 12px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit;" />
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%;">RUN SECURITY AUDIT</button>
+      </form>
+
+      {% if result %}
+        {% if result.safe %}
+          <div style="margin-top: 2rem; padding: 1.5rem; border-radius: 4px; background: rgba(63, 185, 80, 0.1); border: 1px solid #3fb950; text-align: center;">
+            <h3 style="margin: 0 0 10px 0; color: #3fb950;">✅ NO BREACHES FOUND</h3>
+            <p style="margin: 0;">{{ result.message }}</p>
+          </div>
+        {% else %}
+          <div style="margin-top: 2rem; padding: 1.5rem; border-radius: 4px; background: rgba(248, 81, 73, 0.1); border: 1px solid var(--danger); text-align: center;">
+            <h3 style="margin: 0 0 10px 0; color: var(--danger);">⚠️ BREACH DETECTED</h3>
+            <p style="margin: 0;">{{ result.message }}</p>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

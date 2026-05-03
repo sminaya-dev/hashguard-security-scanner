@@ -1,0 +1,125 @@
+:root {
+    --bg: #0d1117;
+    --text: #c9d1d9;
+    --accent: #58a6ff;
+    --border: #30363d;
+    --card-bg: #161b22;
+    --danger: #f85149;
+}
+
+[data-theme="light"] {
+    --bg: #ffffff;
+    --text: #1f2328;
+    --accent: #0969da;
+    --border: #d0d7de;
+    --card-bg: #f6f8fa;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* GLOBAL LINK PROTECTION */
+a,
+a:visited,
+a:active {
+    color: var(--accent) !important;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--accent);
+    color: #ffffff !important;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    border-radius: 4px;
+    transition: opacity 0.2s ease;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: inherit;
+    border-radius: 4px;
+}
+
+/* Alerts */
+.alert-danger {
+    background: rgba(248, 81, 73, 0.1);
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    padding: 1rem;
+    margin: 1rem 0;
+    font-weight: bold;
+    border-left: 5px solid var(--danger);
+}
+
+/* Theme Toggle */
+#theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    padding: 6px;
+    border-radius: 4px;
+    line-height: 0;
+}
+
+#theme-icon {
+    stroke: currentColor;
+    pointer-events: none;
+}
