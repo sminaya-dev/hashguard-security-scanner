@@ -1,4 +1,4 @@
-# hashguard
+# hashguard-security-scanner
 
 *Privacy-preserving credential breach scanner powered by HaveIBeenPwned*
 
