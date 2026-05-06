@@ -9,18 +9,15 @@ from flask_seasurf import SeaSurf
 from flask_talisman import Talisman
 
 app = Flask(__name__)
-# In production, this would be a real secret key from environment variables
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-key-for-resume-project")
 
 # 1. SECURITY HEADERS (Talisman)
-# We allow inline styles/scripts for simplicity in this demo, but force HTTPS logic
 Talisman(app, content_security_policy=None, force_https=False)
 
 # 2. CSRF PROTECTION (SeaSurf)
 csrf = SeaSurf(app)
 
 # 3. RATE LIMITING (Limiter)
-# High limit (1000/hour) so it doesn't annoy you, but shows you know how to implement it.
 limiter = Limiter(
     get_remote_address,
     app=app,
@@ -46,7 +43,6 @@ def pwned_api_check(password):
     except requests.RequestException as e:
         raise RuntimeError(f"API Error: {str(e)}")
 
-    # Process response
     hashes = (line.split(":") for line in res.text.splitlines())
     for h, count in hashes:
         if h == tail:
@@ -55,7 +51,7 @@ def pwned_api_check(password):
 
 
 @app.route("/", methods=["GET", "POST"])
-@limiter.limit("10 per minute")  # Specific stricter limit for the actual check
+@limiter.limit("10 per minute")
 def home():
     result = None
     if request.method == "POST":
